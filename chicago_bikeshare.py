@@ -33,8 +33,8 @@ print("\n\nTASK 1: Printing the first 20 samples")
 
 # Let's change the data_list to remove the header from it.
 data_list = data_list[1:]
-for i in range(20):
-    print(data_list[0:][i])
+for sample in range(20):
+    print(data_list[0:][sample])
 # We can access the features through index
 # E.g. sample[6] to print gender or sample[-2]
 
@@ -44,8 +44,8 @@ input("Press Enter to continue...")
 
 print("\nTASK 2: Printing the genders of the first 20 samples")
 
-for i in range(20):
-    print(data_list[i][6])
+for sample in range(20):
+    print(data_list[sample][6])
 # Cool! We can get the rows(samples) iterating with a for and the columns(features) by index.
 # But it's still hard to get a column in a list. Example: List with all genders
 input("Press Enter to continue...")
@@ -63,8 +63,8 @@ def column_to_list(data, index):
     """
     column_list = []
     # Tip: You can use a for to iterate over the samples, get the feature by index and append into a list
-    for i in range(len(data)):
-        column_list.append(data[i][index])
+    for sample in range(len(data)):
+        column_list.append(data[sample][index])
     return column_list
 
 
@@ -84,10 +84,10 @@ input("Press Enter to continue...")
 # TODO: Count each gender. You should not use a function to do that.
 male = 0
 female = 0
-for i in range(len(data_list)):
-    if data_list[i][6] == "Male":
+for sample in range(len(data_list)):
+    if data_list[sample][6] == "Male":
         male += 1
-    elif data_list[i][6] == "Female":
+    elif data_list[sample][6] == "Female":
         female += 1
 
 # Checking the result
@@ -115,10 +115,10 @@ def count_gender(data_list):
     male = 0
     female = 0
 
-    for i in range(len(data_list)):
-        if data_list[i][6] == "Male":
+    for sample in range(len(data_list)):
+        if data_list[sample][6] == "Male":
             male += 1
-        elif data_list[i][6] == "Female":
+        elif data_list[sample][6] == "Female":
             female += 1
 
     return [male, female]
@@ -149,17 +149,12 @@ def most_popular_gender(data_list):
     """
     answer = ""
 
-    male = 0
-    female = 0
+    genders = count_gender(data_list)
+
+    male = genders[0]
+    female = genders[1]
 
     qtd_generos = []
-
-    for i in range(len(data_list)):
-        if data_list[i][6] == "Male":
-            male += 1
-        elif data_list[i][6] == "Female":
-            female += 1
-
     qtd_generos.append(male)
     qtd_generos.append(female)
 
@@ -212,12 +207,12 @@ def count_user_types(data_list):
     dependent = 0
     customer = 0
 
-    for i in range(len(data_list)):
-        if data_list[i] == "Subscriber":
+    for sample in range(len(data_list)):
+        if data_list[sample] == "Subscriber":
             subscriber += 1
-        elif data_list[i] == "Dependent":
+        elif data_list[sample] == "Dependent":
             dependent += 1
-        elif data_list[i] == "Customer":
+        elif data_list[sample] == "Customer":
             customer += 1
 
     return [subscriber, dependent, customer]
@@ -279,9 +274,12 @@ trip_duration_list = [int(i) for i in trip_duration_list]
 
 ordered_list = sorted(trip_duration_list)
 size_duration_list = len(trip_duration_list)
-less_one_duration = size_duration_list - 1
+#less_one_duration = size_duration_list - 1
 
-median_trip = (ordered_list[int(size_duration_list/2)] + ordered_list[int(less_one_duration/2)]) / 2.0
+if size_duration_list % 2 == 1:
+    median_trip = ordered_list[int(size_duration_list/2)]
+else:
+    median_trip = (ordered_list[(size_duration_list/2)-1] + ordered_list[(size_duration_list/2)]) / 2 
 
 print("\nTASK 9: Printing the min, max, mean and median")
 print("Min: ", str(min_trip), "Max: ", str(max_trip), "Mean: ", str(mean_trip), "Median: ", str(median_trip))
