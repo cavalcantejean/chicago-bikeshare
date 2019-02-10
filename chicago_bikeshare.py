@@ -149,18 +149,11 @@ def most_popular_gender(data_list):
     """
     answer = ""
 
-    genders = count_gender(data_list)
+    [male, female] = count_gender(data_list)
 
-    male = genders[0]
-    female = genders[1]
-
-    qtd_generos = []
-    qtd_generos.append(male)
-    qtd_generos.append(female)
-
-    if qtd_generos[0] > qtd_generos[1]:
+    if male > female:
         answer = "Male"
-    elif qtd_generos[0] < qtd_generos[1]:
+    elif male < female:
         answer = "Female"
     else:
         answer = "Equal"
@@ -246,40 +239,65 @@ input("Press Enter to continue...")
 # TASK 9
 # TODO: Find the Minimum, Maximum, Mean and Median trip duration.
 # You should not use ready functions to do that, like max() or min().
-trip_duration_list = column_to_list(data_list, 2)
+duration_list = column_to_list(data_list, 2)
 min_trip = 0.
 max_trip = 0.
 mean_trip = 0.
 median_trip = 0.
 soma = 0.
 
-for valor in trip_duration_list:
-    if min_trip == 0.:
-        min_trip = int(valor)
-    elif int(valor) < min_trip:
-        min_trip = int(valor)
+def calculate_min_trip():
+    min = 0.
 
-for valor in trip_duration_list:
-    if max_trip == 0.:
-        max_trip = int(valor)
-    elif int(valor) > max_trip:
-        max_trip = int(valor)
+    for valor in duration_list:
+        if min == 0.:
+            min = int(valor)
+        elif int(valor) < min:
+            min = int(valor)
 
-for valor in trip_duration_list:
-    soma += int(valor)
+    return min
 
-mean_trip = soma/len(trip_duration_list)
+def calculate_max_trip():
+    max = 0.
 
-trip_duration_list = [int(i) for i in trip_duration_list]
+    for valor in duration_list:
+        if max == 0.:
+            max = int(valor)
+        elif int(valor) > max:
+            max = int(valor)
 
-ordered_list = sorted(trip_duration_list)
-size_duration_list = len(trip_duration_list)
-#less_one_duration = size_duration_list - 1
+    return max
 
-if size_duration_list % 2 == 1:
-    median_trip = ordered_list[int(size_duration_list/2)]
-else:
-    median_trip = (ordered_list[(size_duration_list/2)-1] + ordered_list[(size_duration_list/2)]) / 2 
+def calculate_mean_trip():
+    mean = 0.
+    soma = 0
+
+    for valor in duration_list:
+        soma += int(valor)
+
+    mean = soma/len(duration_list)
+
+    return mean
+
+def calculate_median_trip():
+    median = 0.
+
+    trip_duration_list = [int(i) for i in duration_list]
+
+    ordered_list = sorted(trip_duration_list)
+    size_duration_list = len(trip_duration_list)
+
+    if size_duration_list % 2 == 1:
+        median = ordered_list[int(size_duration_list / 2)]
+    else:
+        median = (ordered_list[(size_duration_list / 2) - 1] + ordered_list[(size_duration_list / 2)]) / 2
+        
+    return median
+
+min_trip = calculate_min_trip()
+max_trip = calculate_max_trip()
+mean_trip = calculate_mean_trip()
+median_trip = calculate_median_trip()
 
 print("\nTASK 9: Printing the min, max, mean and median")
 print("Min: ", str(min_trip), "Max: ", str(max_trip), "Mean: ", str(mean_trip), "Median: ", str(median_trip))
@@ -338,14 +356,9 @@ def count_items(column_list):
     item_types: list. A description of the different types of contents
     count_items: list. The count of each type of different content.
     """
-
-    count_items = Counter(column_list)
-    count_items = count_items.values()
-    count_items = list(count_items)
-
-    item_types = Counter(column_list)
-    item_types = item_types.keys()
-    item_types = list(item_types)
+    
+    item_types = set(column_list)
+    count_items = [column_list.count(x) for x in set(column_list)]
 
     return item_types, count_items
 
