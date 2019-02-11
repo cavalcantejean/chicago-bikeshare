@@ -4,7 +4,6 @@
 # Here goes the imports
 import csv
 import matplotlib.pyplot as plt
-from collections import Counter
 
 # Let's read the data as a list
 print("Reading the document...")
