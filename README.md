@@ -1,11 +1,16 @@
-# Primeiro projeto do Nanodegree Fundamentos de Data Science da Udacity
+#Conteúdo: Usando prompt de comando com Python para a análise de dados
 
-# chicago-bikeshare
+## Primeiro projeto do Nanodegree Fundamentos de Data Science da Udacity
+
+### chicago-bikeshare
+
 Dados sobre compartilhamento de bicicletas
 
-# Visão geral
+### Visão geral
+
 Neste projeto, você utilizará o Python para explorar dados relacionados aos sistemas de compartilhamento de bicicletas nas três maiores cidades dos Estados Unidos –– Chicago, Nova Iorque e Washington. Você escreverá um código para importar dados e responder a perguntas interessantes sobre eles, por meio da computação de estatísticas descritivas. Você também vai escrever um script que recebe uma entrada bruta para criar uma experiência interativa no terminal, a fim de apresentar estas estatísticas.
-# Perguntas a serem respondidas
+
+### Perguntas a serem respondidas
 
 + Tarefa 1: Mostre as 20 primeiras amostras (linhas) da base de dados
 + Tarefa 2: Mostre o gênero (coluna) das 20 primeiras amostras
